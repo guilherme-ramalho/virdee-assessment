@@ -23,3 +23,22 @@ export interface IFiveDayForecastData {
   cnt: number;
   list: Array<IForecastItem>;
 }
+
+export interface IDailyForecastItem {
+  dt: number;
+  temp: {
+    day: number;
+    min: number;
+    max: number;
+  };
+  weather: {
+    id: number;
+    main: string;
+    icon: string;
+  }
+}
+
+export interface IDailyForecastData {
+  timezone: string;
+  daily: Array<IDailyForecastItem>;
+}
