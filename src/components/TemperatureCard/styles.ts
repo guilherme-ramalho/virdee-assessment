@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface TemperatureProps {
+interface ITemperatureProps {
   accent?: boolean | undefined;
 }
 
@@ -40,7 +40,7 @@ export const TemperatureRow = styled.div`
   width: 100%;
 `;
 
-export const Temperature = styled.span<TemperatureProps>`
+export const Temperature = styled.span<ITemperatureProps>`
   color: ${({ accent }) => (accent ? '#202124' : '#878787')};
   font-size: 13px;
   font-weight: normal;
