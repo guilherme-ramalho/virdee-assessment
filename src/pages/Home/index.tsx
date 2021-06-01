@@ -12,7 +12,7 @@ import { getWeekDayName } from '../../utils';
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const [forcastData, setForecastData] = useState<IDailyForecastData>();
+  const [forecastData, setForecastData] = useState<IDailyForecastData>();
   const [coord, setCoord] = useState({
     lat: 52.20,
     long: 4.15
@@ -56,8 +56,8 @@ const Home: React.FC = () => {
   }
 
   const chartData = useMemo(() => {
-    if (forcastData) {
-      const data = forcastData?.hourly.map(({ temp, dt }) => {
+    if (forecastData) {
+      const data = forecastData?.hourly.map(({ temp, dt }) => {
         const date = new Date(dt * 1000);
         const dateString = date.toLocaleString();
   
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
     }
 
     return undefined;
-  }, [forcastData]);
+  }, [forecastData]);
 
   useEffect(() => {
     getForecastData();
@@ -80,14 +80,14 @@ const Home: React.FC = () => {
   return (
     <Container>
       <WeatherCard>
-        <ForecastCardHeader data={forcastData} />
+        <ForecastCardHeader data={forecastData} />
         {chartData && chartData?.length > 0 && (
           <ChartRow>
             <TemperatureChart data={chartData} />
           </ChartRow>
         )}
         <DailyForecastGrid>
-          {forcastData?.daily.map(({ dt, temp, weather }) => {
+          {forecastData?.daily.map(({ dt, temp, weather }) => {
             const date = new Date(dt * 1000);
             const weatherString = weather[0].main;
 

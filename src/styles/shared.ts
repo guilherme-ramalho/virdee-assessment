@@ -18,12 +18,14 @@ export const WeatherCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #c1c1c180;
   border-radius: 5px;
   box-sizing: border-box;
   height: 400px;
   width: 600px;
   padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 9px rgb(0 0 0 / 25%);
 `;
 
 export const ChartRow = styled.div`

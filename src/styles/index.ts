@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-image: linear-gradient(#368CAA, #7CB7C9, #A2D3DC, #CEE8ED,  #fff);
   }
 `;
 
