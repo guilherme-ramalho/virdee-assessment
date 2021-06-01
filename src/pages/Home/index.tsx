@@ -4,24 +4,26 @@ import axios from 'axios';
 
 import TemperatureCard from '../../components/TemperatureCard';
 import { IDailyForecastData } from '../../shared/interfaces/forecast';
+import TemperatureChart from '../../components/TemperatureChart';
+import ForecastCardHeader from '../../components/ForecastCardHeader';
 
 import { Container, DailyForecastGrid, WeatherCard, ChartRow } from '../../styles/shared';
-import TemperatureChart from '../../components/TemperatureChart';
+import { getWeekDayName } from '../../utils';
 
 const Home: React.FC = () => {
   const history = useHistory();
   const [forcastData, setForecastData] = useState<IDailyForecastData>();
   const [coord, setCoord] = useState({
-    lat: 33.44,
-    long: -94.04
+    lat: 52.20,
+    long: 4.15
   });
 
   const getForecastData = () => {
     axios.get<IDailyForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
       params: {
-        lat: -9.59,
-        lon: -35.75,
-        exclude: 'current,minutely,alerts',
+        lat: coord.lat,
+        lon: coord.long,
+        exclude: 'minutely,alerts',
         appid: '4f032b00b5aae1e573620c389f5d742e',
         units: 'imperial'
       }
@@ -42,9 +44,7 @@ const Home: React.FC = () => {
   };
 
   const navigateToHourlyForecast = (date: Date) => {
-    const weekDay = date.toLocaleDateString('en', {
-      weekday: 'long'
-    });
+    const weekDay = getWeekDayName(date, 'long');
 
     history.push({
       pathname: `/${weekDay.toLowerCase()}`,
@@ -80,6 +80,7 @@ const Home: React.FC = () => {
   return (
     <Container>
       <WeatherCard>
+        <ForecastCardHeader data={forcastData} />
         {chartData && chartData?.length > 0 && (
           <ChartRow>
             <TemperatureChart data={chartData} />
@@ -88,13 +89,14 @@ const Home: React.FC = () => {
         <DailyForecastGrid>
           {forcastData?.daily.map(({ dt, temp, weather }) => {
             const date = new Date(dt * 1000);
+            const weatherString = weather[0].main;
 
             return (
               <TemperatureCard 
                 key={dt} 
                 maxTemp={temp.max}
                 minTemp={temp.min}
-                weather={weather.main}
+                weather={weatherString}
                 date={date}
                 onClick={() => navigateToHourlyForecast(date)}
               />

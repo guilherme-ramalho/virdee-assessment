@@ -31,25 +31,31 @@ export interface IDailyForecastItem {
     min: number;
     max: number;
   };
-  weather: {
+  weather: Array<{
     id: number;
     main: string;
     icon: string;
-  }
+  }>;
 }
 
 export interface IHourlyForecastItem {
   dt: number;
   temp: number;
-  weather: {
+  humidity: number;
+  weather: Array<{
     id: number;
     main: string;
     icon: string;
-  }
+    description: string;
+  }>;
+  wind_deg: number;
+  wind_gust: number;
+  wind_speed: number;
 }
 
 export interface IDailyForecastData {
   timezone: string;
   daily: Array<IDailyForecastItem>;
   hourly: Array<IHourlyForecastItem>;
+  current: IHourlyForecastItem
 }

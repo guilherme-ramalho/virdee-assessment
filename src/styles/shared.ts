@@ -16,7 +16,7 @@ export const DailyForecastGrid = styled.div`
 export const WeatherCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   border: 1px solid #c1c1c180;
   border-radius: 5px;
