@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import axios from 'axios';
 
 import TemperatureCard from '../../components/TemperatureCard';
 import { IDailyForecastData } from '../../shared/interfaces/forecast';
 
-import { Container, DailyForecastGrid, WeatherCard } from '../../styles/shared';
+import { Container, DailyForecastGrid, WeatherCard, ChartRow } from '../../styles/shared';
+import TemperatureChart from '../../components/TemperatureChart';
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -55,20 +56,22 @@ const Home: React.FC = () => {
   }
 
   const chartData = useMemo(() => {
-    const data = forcastData?.hourly.map(({ temp, dt }) => {
-      const date = new Date(dt * 1000);
-      const dateString = date.toLocaleString();
+    if (forcastData) {
+      const data = forcastData?.hourly.map(({ temp, dt }) => {
+        const date = new Date(dt * 1000);
+        const dateString = date.toLocaleString();
+  
+        return {
+          y: temp,
+          x: dateString,
+        }
+      });
+  
+      return data;
+    }
 
-      return {
-        x: temp,
-        y: dateString,
-      }
-    });
-
-    return data;
+    return undefined;
   }, [forcastData]);
-
-  console.log(chartData);  
 
   useEffect(() => {
     getForecastData();
@@ -77,6 +80,11 @@ const Home: React.FC = () => {
   return (
     <Container>
       <WeatherCard>
+        {chartData && chartData?.length > 0 && (
+          <ChartRow>
+            <TemperatureChart data={chartData} />
+          </ChartRow>
+        )}
         <DailyForecastGrid>
           {forcastData?.daily.map(({ dt, temp, weather }) => {
             const date = new Date(dt * 1000);

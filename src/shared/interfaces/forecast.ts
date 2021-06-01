@@ -38,8 +38,18 @@ export interface IDailyForecastItem {
   }
 }
 
+export interface IHourlyForecastItem {
+  dt: number;
+  temp: number;
+  weather: {
+    id: number;
+    main: string;
+    icon: string;
+  }
+}
+
 export interface IDailyForecastData {
   timezone: string;
   daily: Array<IDailyForecastItem>;
-  hourly: Array<IDailyForecastItem>;
+  hourly: Array<IHourlyForecastItem>;
 }
