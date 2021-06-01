@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from '../pages/Home';
+import HourlyForecast from '../pages/HourlyForecast';
 
 const Routes = () => {
   const weekPaths = [
@@ -16,15 +17,8 @@ const Routes = () => {
 
   return (
     <Router>
-      <Route path="/" exact>
-        <Home />
-      </Route>
-      <Route path={weekPaths}>
-        <Home />
-      </Route>
-      <Route>
-        <p>error</p>
-      </Route>
+      <Route path="/" exact component={Home} />
+      <Route path={weekPaths} component={Home} />
     </Router>
   );
 }

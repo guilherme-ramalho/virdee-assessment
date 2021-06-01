@@ -1,10 +1,15 @@
+import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
 interface ITemperatureProps {
   accent?: boolean | undefined;
 }
 
-export const Container = styled.div`
+interface IContainerProps {
+  onClick: MouseEventHandler<HTMLDivElement>;
+}
+
+export const Container = styled.div<IContainerProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

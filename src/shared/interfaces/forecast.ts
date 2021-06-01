@@ -41,4 +41,5 @@ export interface IDailyForecastItem {
 export interface IDailyForecastData {
   timezone: string;
   daily: Array<IDailyForecastItem>;
+  hourly: Array<IDailyForecastItem>;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
 import {
   Container, WeekDay, Temperature, ImageWrapper, WeatherImage, TemperatureRow,
@@ -9,6 +9,7 @@ interface ITemperatureCardProps {
   minTemp: number;
   weather: string;
   date: Date;
+  onClick: MouseEventHandler<HTMLDivElement>;
 }
 
 const TemperatureCard: React.FC<ITemperatureCardProps> = ({
@@ -16,13 +17,11 @@ const TemperatureCard: React.FC<ITemperatureCardProps> = ({
   maxTemp,
   minTemp,
   weather,
+  onClick,
 }) => {
-  console.log(date);
-  
-
   const getWeekDayName = () => date.toLocaleDateString('en', {
     weekday: 'short',
-  })
+  });
 
   const getWeatherImage = () => {
     if (weather) {
@@ -33,7 +32,7 @@ const TemperatureCard: React.FC<ITemperatureCardProps> = ({
   }
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <WeekDay>{getWeekDayName()}</WeekDay>
       <ImageWrapper>
         <WeatherImage src={getWeatherImage()} />
