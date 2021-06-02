@@ -8,6 +8,7 @@ import ForecastCardHeader from '../../components/ForecastCardHeader';
 
 import { Container, WeatherCard } from '../../styles/shared';
 import ForecastGrid from '../../components/ForecastGrid';
+import { alert } from '../../utils';
 
 const Home: React.FC = () => {
   const [forecastData, setForecastData] = useState<IDailyForecastData>();
@@ -34,8 +35,8 @@ const Home: React.FC = () => {
           alert('Error getting forecast data');
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        alert('Could\'t get forecast data from the server');
       });
     }
   };
@@ -50,6 +51,8 @@ const Home: React.FC = () => {
       })
     },
     () => {
+      alert('Couldn\'t get yout location. Setting the default to London.');
+
       setCoord({
         lat: 51.509865,
         long: -0.118092

@@ -1,3 +1,5 @@
+import { toast, ToastOptions } from "react-toastify";
+
 export const getWeatherImage = (weather: string, picSize?: number) => {   
   const size = picSize || 48;
   
@@ -21,3 +23,16 @@ export const getWeekDayName = (
 ) => date.toLocaleDateString('en', {
   weekday: type,
 });
+
+export const alert = (message: string, error?: boolean) => {
+  const config: ToastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+  }
+
+  if (error) {
+    toast.error(message, config)
+  } else {
+    toast(message, config);
+  }
+}
