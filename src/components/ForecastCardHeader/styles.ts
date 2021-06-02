@@ -9,14 +9,24 @@ export const Container = styled.div`
 
 export const TempGrid = styled.div`
   display: grid;
-  grid-template-columns: 70px 70px auto;
+  grid-template-columns: 70px 80px auto;
 `;
 
-export const Temp = styled.span`
+export const TempWrapper = styled.div`
+  display: flex;
+`;
+
+export const TempValue = styled.span`
   display: flex;
   align-items: center;
   font-size: 46px;
   font-weight: normal;
+`;
+
+export const TempUnity = styled.span`
+  display: flex;
+  margin-top: 15px;
+  font-weight: 16px !important;
 `;
 
 export const ImageWrapper = styled.div`
@@ -25,10 +35,6 @@ export const ImageWrapper = styled.div`
 `;
 
 export const ForecastImage = styled.img``;
-
-export const TempUnity = styled.span`
-  font-weight: 16px !important;
-`;
 
 export const WindRow = styled.div`
   display: flex;

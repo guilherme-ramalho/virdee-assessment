@@ -2,7 +2,7 @@ import React from 'react';
 import { IDailyForecastData } from '../../shared/interfaces/forecast';
 import { getWeatherImage } from '../../utils';
 
-import { Container, TempGrid, Temp, ImageWrapper, ForecastImage, WindRow, WindText, LocationRow, LocationText, WeatherDescription } from './styles';
+import { Container, TempGrid, TempValue, TempUnity, ImageWrapper, ForecastImage, WindRow, WindText, LocationRow, LocationText, WeatherDescription, TempWrapper } from './styles';
 
 interface IForecastCardHeader {
   data: IDailyForecastData | undefined;
@@ -17,9 +17,12 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data }) => {
         <ImageWrapper>
           <ForecastImage src={getWeatherImage(weather, 64)} />
         </ImageWrapper>
-        <Temp>
-          {data?.current?.temp.toFixed(0)}
-        </Temp>
+        <TempWrapper>
+          <TempValue>
+            {data?.current?.temp.toFixed(0)}
+          </TempValue>
+          <TempUnity>°F</TempUnity>
+        </TempWrapper>
         <WindRow>
           <WindText>Feels like: {data?.current.feels_like.toFixed(0)}°F</WindText>
           <WindText>Humidity: {data?.current.humidity}%</WindText>
