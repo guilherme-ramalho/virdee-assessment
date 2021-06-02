@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
   width: 100%;
-  height: 60px;
+  height: 70px;
 `;
 
 export const TempGrid = styled.div`

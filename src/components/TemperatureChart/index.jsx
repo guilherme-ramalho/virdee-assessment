@@ -57,7 +57,7 @@ const TemperatureChart = ({ data }) => {
           }}
         />
       ) : (
-        <SkeletonBox height="100px" />
+        <SkeletonBox height="130px" />
       )}
     </Container>
   )
