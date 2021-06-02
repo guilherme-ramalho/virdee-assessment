@@ -38,18 +38,29 @@ const Home: React.FC = () => {
         console.log(error);
       });
     }
-  }; 
+  };
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
+  const getClientPosition = () => {
+    navigator.geolocation.getCurrentPosition(({ coords }) => {      
       const { latitude, longitude } = coords;      
 
       setCoord({
         lat: latitude,
         long: longitude
       })
+    },
+    () => {
+      setCoord({
+        lat: 51.509865,
+        long: -0.118092
+      })
+    },
+    {
+      timeout: 3000,
     });
-  }, []);
+  }
+
+  useEffect(getClientPosition, []);
 
   useEffect(() => {
     if (coord) {
