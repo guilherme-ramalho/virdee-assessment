@@ -10,16 +10,19 @@ import ForecastCardHeader from '../../components/ForecastCardHeader';
 import { Container, DailyForecastGrid, WeatherCard, ChartRow } from '../../styles/shared';
 import { getWeekDayName } from '../../utils';
 
+interface ICoordState {
+  lat: number;
+  long: number;
+}
+
 const Home: React.FC = () => {
   const history = useHistory();
   const [forecastData, setForecastData] = useState<IDailyForecastData>();
-  const [coord, setCoord] = useState({
-    lat: 52.20,
-    long: 4.15
-  });
+  const [coord, setCoord] = useState<ICoordState>();
 
   const getForecastData = () => {
-    axios.get<IDailyForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
+    if (coord) {
+      axios.get<IDailyForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
       params: {
         lat: coord.lat,
         lon: coord.long,
@@ -41,6 +44,7 @@ const Home: React.FC = () => {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
 
   const navigateToHourlyForecast = (date: Date) => {
@@ -74,8 +78,21 @@ const Home: React.FC = () => {
   }, [forecastData]);
 
   useEffect(() => {
-    getForecastData();
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const { latitude, longitude } = coords;      
+
+      setCoord({
+        lat: latitude,
+        long: longitude
+      })
+    });
   }, []);
+
+  useEffect(() => {
+    if (coord) {
+      getForecastData();
+    }
+  }, [coord]);
 
   return (
     <Container>

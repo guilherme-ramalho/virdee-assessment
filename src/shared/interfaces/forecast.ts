@@ -51,6 +51,7 @@ export interface IHourlyForecastItem {
   wind_deg: number;
   wind_gust: number;
   wind_speed: number;
+  feels_like: number;
 }
 
 export interface IDailyForecastData {

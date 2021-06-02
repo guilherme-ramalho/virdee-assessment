@@ -21,8 +21,8 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data }) => {
           {data?.current?.temp.toFixed(0)}
         </Temp>
         <WindRow>
-          <WindText>Chuva: </WindText>
-          <WindText>Umidity: {data?.current.humidity}%</WindText>
+          <WindText>Feels like: {data?.current.feels_like.toFixed(0)}°F</WindText>
+          <WindText>Humidity: {data?.current.humidity}%</WindText>
           <WindText>Wind speed: {data?.current.wind_speed}mph</WindText>
         </WindRow>
       </TempGrid>

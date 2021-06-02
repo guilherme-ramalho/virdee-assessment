@@ -5,7 +5,6 @@ export const Container = styled.div`
   grid-template-columns: 50% 50%;
   width: 100%;
   height: 60px;
-  background-color: #c1c1c130;
 `;
 
 export const TempGrid = styled.div`

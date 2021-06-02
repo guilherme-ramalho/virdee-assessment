@@ -15,7 +15,7 @@ export const Container = styled.div<IContainerProps>`
   justify-content: space-between;
   align-items: center;
   height: 95px;
-  width: 75px;
+  width: 100%;
   background-color: #fff;
   transition: transform 250ms;
   cursor: pointer;
@@ -41,7 +41,7 @@ export const WeatherImage = styled.img``;
 
 export const TemperatureRow = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
 `;
 
@@ -49,4 +49,5 @@ export const Temperature = styled.span<ITemperatureProps>`
   color: ${({ accent }) => (accent ? '#202124' : '#878787')};
   font-size: 13px;
   font-weight: normal;
+  margin: 0 5px;
 `;

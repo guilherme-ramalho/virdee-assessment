@@ -11,6 +11,7 @@ export const DailyForecastGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  width: 100%;
 `;
 
 export const WeatherCard = styled.div`
@@ -30,6 +31,6 @@ export const WeatherCard = styled.div`
 
 export const ChartRow = styled.div`
   display: flex;
-  width: 440px;
-  height: 100px;
+  width: 100%;
+  height: 160px;
 `;
