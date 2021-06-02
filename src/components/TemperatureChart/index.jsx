@@ -6,14 +6,22 @@ import SkeletonBox from '../Skeleton';
 
 const TemperatureChart = ({ data }) => {
   const chartData = useMemo(() => {
-    if (data.length > 0) {
-      const tempData = data;
-      tempData.length = 12;
+    if (data) {
+      const forecastData = data?.hourly.map(({ temp, dt }) => {
+        const date = new Date(dt * 1000);
+        const dateString = date.toLocaleString();
+  
+        return {
+          y: temp,
+          x: dateString,
+        }
+      });
+
+      forecastData.length = 12;
       
       return [{
         id: 'temp',
-        color: "hsl(178, 70%, 50%)",
-        data: tempData,
+        data: forecastData,
       }];
     }
 
