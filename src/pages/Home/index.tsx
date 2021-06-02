@@ -74,7 +74,7 @@ const Home: React.FC = () => {
       return data;
     }
 
-    return undefined;
+    return [];
   }, [forecastData]);
 
   useEffect(() => {
@@ -98,11 +98,7 @@ const Home: React.FC = () => {
     <Container>
       <WeatherCard>
         <ForecastCardHeader data={forecastData} />
-        {chartData && chartData?.length > 0 && (
-          <ChartRow>
-            <TemperatureChart data={chartData} />
-          </ChartRow>
-        )}
+        <TemperatureChart data={chartData} />
         <DailyForecastGrid>
           {forecastData?.daily.map(({ dt, temp, weather }) => {
             const date = new Date(dt * 1000);
