@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { IDailyForecastData } from '../../shared/interfaces/forecast';
+import { IForecastData } from '../../shared/interfaces/forecast';
 import { ICoordState } from '../../shared/interfaces/states';
 import TemperatureChart from '../../components/TemperatureChart';
 import ForecastCardHeader from '../../components/ForecastCardHeader';
@@ -11,12 +11,12 @@ import ForecastGrid from '../../components/ForecastGrid';
 import { alert } from '../../utils';
 
 const Home: React.FC = () => {
-  const [forecastData, setForecastData] = useState<IDailyForecastData>();
+  const [forecastData, setForecastData] = useState<IForecastData>();
   const [coord, setCoord] = useState<ICoordState>();
 
   const getForecastData = () => {
     if (coord) {
-      axios.get<IDailyForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
+      axios.get<IForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
       params: {
         lat: coord.lat,
         lon: coord.long,

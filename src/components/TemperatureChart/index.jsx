@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@nivo/line'
 import { useMemo } from 'react';
 import { format } from 'date-fns';
-import { Container } from './styles';
+import { Container, NoDataMessage } from './styles';
 import SkeletonBox from '../Skeleton';
 
 const TemperatureChart = ({ data }) => {
@@ -34,7 +34,7 @@ const TemperatureChart = ({ data }) => {
   }, [data]);
 
   const getExceptionComponent = () => chartData ? (
-      <p>Nothing to show</p>
+      <NoDataMessage>No forecast data available</NoDataMessage>
     ) : (
       <SkeletonBox height="130px" />
     )

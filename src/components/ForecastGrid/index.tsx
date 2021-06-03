@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 
-import { IDailyForecastData } from '../../shared/interfaces/forecast';
+import { IForecastData } from '../../shared/interfaces/forecast';
 import TemperatureCard from '../TemperatureCard';
 
 import { DailyForecastGrid, CardContainer } from './styles';
@@ -11,7 +11,7 @@ import { ICoordState } from '../../shared/interfaces/states';
 import SkeletonBox from '../Skeleton';
 
 interface IForecastGridProps {
-  data: IDailyForecastData | undefined;
+  data: IForecastData | undefined;
   coord: ICoordState | undefined;
 }
 

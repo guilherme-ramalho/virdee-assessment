@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 
 import { isEqual } from 'date-fns';
 import { Container, WeatherCard } from '../../styles/shared';
-import { IDailyForecastData } from '../../shared/interfaces/forecast';
+import { IForecastData } from '../../shared/interfaces/forecast';
 import ForecastCardHeader from '../../components/ForecastCardHeader';
 import TemperatureChart from '../../components/TemperatureChart';
 import { alert, getDateFromWeekDayName } from '../../utils';
@@ -18,17 +18,16 @@ interface IHourlyForecast {
 }
 
 const HourlyForecast: React.FC = () => {
-  const [forecastData, setForecastData] = useState<IDailyForecastData>();
+  const [forecastData, setForecastData] = useState<IForecastData>();
   const { state, pathname } = useLocation<IHourlyForecast>();
   const pathWeekDay = pathname.substring(1);
-  const weekDayDate = getDateFromWeekDayName(pathWeekDay);
-  const selectedDate = state?.date || weekDayDate;
+  const selectedDate = state?.date || getDateFromWeekDayName(pathWeekDay);
 
   const getForecastData = () => {
     const lat = state?.coord?.lat || 51.509865;
     const lon = state?.coord?.long || -0.118092;
 
-    axios.get<IDailyForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
+    axios.get<IForecastData>('https://api.openweathermap.org/data/2.5/onecall', {
       params: {
         lat,
         lon,
@@ -70,7 +69,7 @@ const HourlyForecast: React.FC = () => {
   return (
     <Container>
       <WeatherCard>
-        <ForecastCardHeader data={forecastData} />
+        <ForecastCardHeader data={forecastData} currentDate={selectedDate} />
         <TemperatureChart data={formattedHourlyForecast} />
       </WeatherCard>
     </Container>

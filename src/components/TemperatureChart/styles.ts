@@ -7,3 +7,8 @@ export const Container = styled.div`
   width: 100%;
   height: 160px;
 `;
+
+export const NoDataMessage = styled.p`
+  color: #70757a;
+  font-size: 18px;
+`;

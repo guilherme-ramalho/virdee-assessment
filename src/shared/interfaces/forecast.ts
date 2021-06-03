@@ -30,12 +30,21 @@ export interface IFiveDayForecastData {
 
 export interface IDailyForecastItem {
   dt: number;
+  feels_like: {
+    day: number;
+    night: number;
+    eve: number;
+    morn: number;
+  }
+  rain: number;
+  humidity: number;
   temp: {
     day: number;
     min: number;
     max: number;
   };
   weather: Array<IWeather>;
+  wind_speed: number;
 }
 
 export interface IHourlyForecastItem {
@@ -49,7 +58,7 @@ export interface IHourlyForecastItem {
   feels_like: number;
 }
 
-export interface IDailyForecastData {
+export interface IForecastData {
   timezone: string;
   daily: Array<IDailyForecastItem>;
   hourly: Array<IHourlyForecastItem>;
