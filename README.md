@@ -1,6 +1,6 @@
 ### Published test URL:
 
-http://virdeetest.surge.sh/
+https://virdee-assessment.vercel.app/
 
 ### Cloning the project
 
