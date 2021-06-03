@@ -47,6 +47,7 @@ const TemperatureChart = ({ data }) => {
           curve="cardinal"
           enableArea
           margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
+          colors={['#c7a930', '#363636']}
           isInteractive
           lineWidth={2}
           enableGridX={false}

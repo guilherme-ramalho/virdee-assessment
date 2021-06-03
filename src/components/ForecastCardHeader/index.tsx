@@ -65,7 +65,7 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data, currentDate }
           </TempGrid>
           <LocationRow>
             <LocationText>{data?.timezone}</LocationText>
-            <DateText>{format(date, 'MMMM do')}</DateText>
+            <DateText>{format(date, 'EEEE (MMMM do)')}</DateText>
             <WeatherDescription>{forecast.weather[0].description}</WeatherDescription>
           </LocationRow>
         </>
