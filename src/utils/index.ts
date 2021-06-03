@@ -1,4 +1,9 @@
+import { addDays, getISODay } from "date-fns";
 import { toast, ToastOptions } from "react-toastify";
+
+interface IWeekMap {
+  [key: string]: number;
+}
 
 export const getWeatherImage = (weather: string, picSize?: number) => {   
   const size = picSize || 48;
@@ -36,3 +41,17 @@ export const alert = (message: string, error?: boolean) => {
     toast(message, config);
   }
 }
+
+export const getDateFromWeekDayName = (weekDayName: string) => {
+	const date = new Date();
+	const now = date.getDay();
+	const weekDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+	const weekDayIndex = weekDays.indexOf(weekDayName.toLowerCase());
+
+  let diff = weekDayIndex - now;
+	diff = diff < 1 ? 7 + diff : diff;
+
+	const nextDayTimestamp = date.getTime() + (1000 * 60 * 60 * 24 * diff);
+
+	return new Date(nextDayTimestamp);
+};

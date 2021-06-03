@@ -18,7 +18,9 @@ const Routes = () => {
   return (
     <Router>
       <Route path="/" exact component={Home} />
-      <Route path={weekPaths} component={Home} />
+      {weekPaths.map((weekDay) => (
+        <Route key={weekDay} path={weekDay} component={HourlyForecast} />
+      ))}
     </Router>
   );
 }
