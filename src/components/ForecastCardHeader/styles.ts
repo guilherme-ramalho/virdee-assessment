@@ -59,6 +59,10 @@ export const LocationText = styled.span`
   font-size: 22px;
 `;
 
+export const DateText = styled.span`
+  font-size: 14px;
+`;
+
 export const WeatherDescription = styled.span`
   font-size: 16px;
   color: #70757a;

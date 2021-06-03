@@ -1,4 +1,4 @@
-import { isEqual } from 'date-fns';
+import { isEqual, format } from 'date-fns';
 import React, { useMemo } from 'react';
 import { IForecastData } from '../../shared/interfaces/forecast';
 import { getWeatherImage } from '../../utils';
@@ -16,7 +16,9 @@ import {
   LocationRow,
   LocationText,
   WeatherDescription,
-  TempWrapper} from './styles';
+  TempWrapper,
+  DateText,
+} from './styles';
 
 interface IForecastCardHeader {
   data: IForecastData | undefined;
@@ -24,13 +26,13 @@ interface IForecastCardHeader {
 }
 
 const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data, currentDate }) => {
-  const weather = data?.current?.weather[0].main || '';
+  const date = currentDate || new Date()
 
   const forecast = useMemo(() => {
     if (data?.daily) {
       const foundForecast = data.daily.find(({ dt }) => {
         const forecastDate = new Date(dt * 1000).setHours(0, 0, 0, 0);
-        const selectedDate = (currentDate || new Date()).setHours(0, 0, 0, 0);
+        const selectedDate = date.setHours(0, 0, 0, 0);
 
         return isEqual(forecastDate, selectedDate);
       })
@@ -41,15 +43,13 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data, currentDate }
     return undefined;
   }, [data]);
 
-  console.log(forecast);  
-
   return (
     <Container>
       {forecast ? (
         <>
           <TempGrid>
             <ImageWrapper>
-              <ForecastImage src={getWeatherImage(weather, 64)} />
+              <ForecastImage src={getWeatherImage(forecast.weather[0].main, 64)} />
             </ImageWrapper>
             <TempWrapper>
               <TempValue>
@@ -58,13 +58,14 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data, currentDate }
               <TempUnity>°F</TempUnity>
             </TempWrapper>
             <WindRow>
-              <WindText>Feels like: {forecast.feels_like.day.toFixed(0)}°F</WindText>
+              <WindText>Rain: {forecast.rain * 100}%</WindText>
               <WindText>Humidity: {forecast.humidity.toFixed(0)}%</WindText>
               <WindText>Wind speed: {forecast.wind_speed.toFixed(0)}mph</WindText>
             </WindRow>
           </TempGrid>
           <LocationRow>
             <LocationText>{data?.timezone}</LocationText>
+            <DateText>{format(date, 'MMMM do')}</DateText>
             <WeatherDescription>{forecast.weather[0].description}</WeatherDescription>
           </LocationRow>
         </>
@@ -80,6 +81,7 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data, currentDate }
           <LocationRow>
             <SkeletonBox height="26px" width="160px" />
             <SkeletonBox height="18px" width="100px" />
+            <SkeletonBox height="14px" width="100px" />
           </LocationRow>
         </>
       )}
