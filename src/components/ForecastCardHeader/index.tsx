@@ -58,7 +58,7 @@ const ForecastCardHeader: React.FC<IForecastCardHeader> = ({ data, currentDate }
               <TempUnity>°F</TempUnity>
             </TempWrapper>
             <WindRow>
-              <WindText>Rain: {forecast.rain * 100}%</WindText>
+              <WindText>Rain: {forecast.rain ? `${forecast.rain}mm` : '---'}</WindText>
               <WindText>Humidity: {forecast.humidity.toFixed(0)}%</WindText>
               <WindText>Wind speed: {forecast.wind_speed.toFixed(0)}mph</WindText>
             </WindRow>
