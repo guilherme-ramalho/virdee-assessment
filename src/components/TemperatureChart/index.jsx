@@ -17,22 +17,33 @@ const TemperatureChart = ({ data }) => {
         }
       });
 
-      forecastData.length = 12;
+      if (forecastData.length > 12) {
+        forecastData.length = 12;
+      }
       
-      return [{
-        id: 'temp',
-        data: forecastData,
-      }];
+      return {
+        length: forecastData.length,
+        dataArray: [{
+          id: 'temp',
+          data: forecastData,
+        }]
+      };
     }
 
     return undefined;
   }, [data]);
 
+  const getExceptionComponent = () => chartData ? (
+      <p>Nothing to show</p>
+    ) : (
+      <SkeletonBox height="130px" />
+    )
+
   return (
     <Container>
-      {chartData ? (
+      {chartData && data?.hourly.length > 0 ? (
         <ResponsiveLine
-          data={chartData}
+          data={chartData.dataArray}
           curve="cardinal"
           enableArea
           margin={{ top: 20, right: 20, bottom: 30, left: 20 }}
@@ -56,9 +67,7 @@ const TemperatureChart = ({ data }) => {
             format: (value) => format(new Date(value), 'kaaa')
           }}
         />
-      ) : (
-        <SkeletonBox height="130px" />
-      )}
+      ) : getExceptionComponent()}
     </Container>
   )
 };

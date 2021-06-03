@@ -49,23 +49,21 @@ const HourlyForecast: React.FC = () => {
       });
   };
 
-  // const formattedHourlyForecast = useMemo(() => {
-  //   if (forecastData) {
-  //     const data = forecastData;
-  //     data.hourly = forecastData.hourly.filter(({ dt }) => {
-  //       const currentItemDate = new Date(dt * 1000).setHours(0, 0, 0, 0);
-  //       const currentDate = selectedDate.setHours(0, 0, 0, 0);
+  const formattedHourlyForecast = useMemo(() => {
+    if (forecastData) {
+      const data = forecastData;
+      data.hourly = forecastData.hourly.filter(({ dt }) => {
+        const currentItemDate = new Date(dt * 1000).setHours(0, 0, 0, 0);
+        const currentDate = selectedDate.setHours(0, 0, 0, 0);
         
-  //       return isEqual(currentItemDate, currentDate);
-  //     });
+        return isEqual(currentItemDate, currentDate);
+      });
 
-  //     data.hourly.length = 12;
+      return data;
+    }
 
-  //     return data;
-  //   }
-
-  //   return undefined;
-  // }, [forecastData, selectedDate]);
+    return undefined;
+  }, [forecastData, selectedDate]);
   
   useEffect(getForecastData, []);
 
@@ -73,7 +71,7 @@ const HourlyForecast: React.FC = () => {
     <Container>
       <WeatherCard>
         <ForecastCardHeader data={forecastData} />
-        <TemperatureChart data={forecastData} />
+        <TemperatureChart data={formattedHourlyForecast} />
       </WeatherCard>
     </Container>
   );

@@ -1,9 +1,4 @@
-import { addDays, getISODay } from "date-fns";
 import { toast, ToastOptions } from "react-toastify";
-
-interface IWeekMap {
-  [key: string]: number;
-}
 
 export const getWeatherImage = (weather: string, picSize?: number) => {   
   const size = picSize || 48;
