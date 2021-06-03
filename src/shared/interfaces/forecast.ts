@@ -1,3 +1,10 @@
+export interface IWeather {
+  id: number;
+  main: string;
+  icon: string;
+  description: string;
+};
+
 export interface IForecastItem {
   dt: number;
   dt_txt: string;
@@ -12,10 +19,7 @@ export interface IForecastItem {
     temp_max: number;
     temp_min: number;
   },
-  weather: Array<{
-    main: string;
-    description: string;
-  }>
+  weather: Array<IWeather>;
 }
 
 export interface IFiveDayForecastData {
@@ -31,23 +35,14 @@ export interface IDailyForecastItem {
     min: number;
     max: number;
   };
-  weather: Array<{
-    id: number;
-    main: string;
-    icon: string;
-  }>;
+  weather: Array<IWeather>;
 }
 
 export interface IHourlyForecastItem {
   dt: number;
   temp: number;
   humidity: number;
-  weather: Array<{
-    id: number;
-    main: string;
-    icon: string;
-    description: string;
-  }>;
+  weather: Array<IWeather>;
   wind_deg: number;
   wind_gust: number;
   wind_speed: number;

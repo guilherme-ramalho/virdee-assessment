@@ -4,12 +4,13 @@ import {
   Container, WeekDay, Temperature, ImageWrapper, WeatherImage, TemperatureRow,
 } from './styles';
 
+import { IWeather } from '../../shared/interfaces/forecast'
 import { getWeatherImage, getWeekDayName } from '../../utils';
 
 interface ITemperatureCardProps {
   maxTemp: number;
   minTemp: number;
-  weather: string;
+  weather: IWeather;
   date: Date;
   onClick: MouseEventHandler<HTMLDivElement>;
 }
@@ -24,7 +25,7 @@ const TemperatureCard: React.FC<ITemperatureCardProps> = ({
     <Container onClick={onClick}>
       <WeekDay>{getWeekDayName(date, 'short')}</WeekDay>
       <ImageWrapper>
-        <WeatherImage src={getWeatherImage(weather)} />
+        <WeatherImage src={getWeatherImage(weather.main)} />
       </ImageWrapper>
       <TemperatureRow>
         <Temperature accent>{Math.round(maxTemp)}°F</Temperature>

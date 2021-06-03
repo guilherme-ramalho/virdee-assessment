@@ -34,14 +34,13 @@ const ForecastGrid: React.FC<IForecastGridProps> = ({ data, coord }) => {
     <DailyForecastGrid>
       {data ? data?.daily.map(({ dt, temp, weather }) => {
         const date = new Date(dt * 1000);
-        const weatherString = weather[0].main;
   
         return (
           <TemperatureCard 
             key={dt} 
             maxTemp={temp.max}
             minTemp={temp.min}
-            weather={weatherString}
+            weather={weather[0]}
             date={date}
             onClick={() => navigateToHourlyForecast(date)}
           />
